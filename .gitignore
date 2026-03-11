@@ -1,0 +1,8 @@
+.idea/
+.vscode/
+**/.idea/
+**/.vscode/
+**/.gradle-local/
+**/log/
+*.log
+.DS_Store
