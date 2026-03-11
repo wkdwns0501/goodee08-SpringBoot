@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- 드립 커피 머신 객체 생성 -->
+    <bean id="dripCoffeeMachine" class="com.example.demo.DripCoffeeMachine" />
+
+    <!-- 에스프레소 머신 객체 생성 -->
+    <bean id="espressoMachine" class="com.example.demo.EspressoMachine" />
+
+    <!-- 커피 메이커 객체 생성 -->
+    <!-- init-method를 통해 객체 생성 직후 실행할 메소드도 지정 -->
+    <bean id="coffeeMaker" class="com.example.demo.CoffeeMaker" init-method="makeCoffee">
+        <!-- 커피 머신 프로퍼티에 에스프레소 머신 객체를 주입(Setter 필수!) -->
+        <property name="coffeeMachine" ref="espressoMachine" />
+    </bean>
+
+</beans>
