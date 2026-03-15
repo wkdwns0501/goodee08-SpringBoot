@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>숫자 유틸리티</title>
+</head>
+<body>
+  <!-- 소수점 이하 두 자리까지 표시하되 정수 부분에 콤마를 넣지 않도록 지정 -->
+  <p>formatDecimal</p>
+  <p th:text="${#numbers.formatDecimal(productPrice, 1, 2)}"></p>
+  <p th:text="${#numbers.formatDecimal(productPrice, 10, 2)}"></p>
+
+  <!-- 정수 표시 -->
+  <p>formatInteger</p>
+  <p th:text="${#numbers.formatInteger(productCount, 1, 'COMMA')}"></p><!-- 세 자리마다 콤마 -->
+  <p th:text="${#numbers.formatInteger(productCount, 10)}"></p>
+</body>
+</html>
