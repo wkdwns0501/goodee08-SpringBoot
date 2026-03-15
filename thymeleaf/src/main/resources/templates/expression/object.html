@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>회원 정보</title>
+</head>
+<body>
+  <ul>
+    <li th:text="${member.name}">name</li>
+    <li th:text="${member.email}">email</li>
+    <li th:text="${member.age}">age</li>
+  </ul>
+
+  <!-- 상위 태그에 회원 객체를 지정하고, 하위 태그에서는 속성 이름을 사용해 접근 가능 -->
+  <ul th:object="${member}">
+    <li th:text="*{name}">name</li>
+    <li th:text="*{email}">email</li>
+    <li th:text="*{age}">age</li>
+  </ul>
+</body>
+</html>
