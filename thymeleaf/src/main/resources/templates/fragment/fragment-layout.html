@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragment/layout :: layout(~{::title}, ~{::link}, ~{::section}, '프로모션')}">
+<!-- fragment/layout.html 파일의 layout 프래그먼트, 즉 <html> 태그를 통째로 불러와 이곳의 <html> 태그를 대체 -->
+<!-- 이때 페이지 내에 있는 title, link, section과 같은 영역이 레이아웃 파일 안으로 포함됨-->
+<head>
+  <meta charset="UTF-8">
+  <title>프래그먼트</title>
+  <link rel="stylesheet" th:href="@{/css/round-shadow-box.css}">
+</head>
+<body>
+  <section>
+    <p>
+      <span class="round-shadow-box">구디아카데미에 오신 것을 환영합니다.</span>
+    </p>
+  </section>
+</body>
+</html>
