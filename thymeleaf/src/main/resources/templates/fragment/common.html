@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>공통 레이아웃</title>
+</head>
+<body>
+  <header th:fragment="header(menu)">
+    <p style="background-color: black; color: white; padding: 12px;">
+      구디아카데미 | 강의 | 책 | 대관 | <span th:text="${menu}">이벤트</span> | 자료실
+    </p>
+  </header>
+
+  <footer th:fragment="footer">
+    <p style="background-color: black; color: white; padding: 12px;">
+      Copyright 2025 Goodee Academy
+    </p>
+  </footer>
+</body>
+</html>
