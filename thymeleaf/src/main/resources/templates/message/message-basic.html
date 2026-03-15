@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>구디아카데미</title>
+</head>
+<body>
+    <!-- ${...}가 모델 객체에서 객체를 검색한 것과 달리, #{...}은 messages.properties 파일에서 메세지를 찾아옴 -->
+    <p th:text="#{welcome}">Greetings</p>
+    <p th:text="#{welcome.description}">Greetings</p> <!-- escape 처리 -->
+    <p th:utext="#{welcome.description}">Greetings</p> <!-- Unescaped Text를 의미 -->
+
+    <!-- 텍스트 일부만 바꾸기 -->
+    <p>환영합니다. <span th:text="#{customer.name}">홍길동</span> 고객님</p>
+</body>
+</html>
