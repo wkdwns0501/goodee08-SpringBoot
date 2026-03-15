@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>회원 정보</title>
+
+    <!-- CSS 파일에 대한 링크 경로 역시 @{}로 감싸는 것을 권장(컨텍스트 경로 자동 추가) -->
+    <link rel="stylesheet" href="@{/css/member.css}">
+</head>
+<body>
+    <ul>
+        <li th:text="${member.name}">name</li>
+        <li th:text="${member.email}">email</li>
+        <li th:text="${member.age}">age</li>
+    </ul>
+</body>
+</html>
