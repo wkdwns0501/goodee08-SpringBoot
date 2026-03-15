@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>날짜 유틸리티</title>
+</head>
+<body>
+  <p th:text="${date}"></p>
+  <p th:text="${#temporals.format(date, 'yyyy/MM/dd')}"></p>
+  <!--  <p th:text="${#calendars.format(date, 'yyyy/MM/dd')}"></p>--> <!-- 예전 문법 -->
+</body>
+</html>
