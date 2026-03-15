@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>구디아카데미</title>
+</head>
+<body>
+    <!-- customer.contact로 정의한 메세지를 사용하는데
+         모델 객체의 name과 phone 값을 ()안에 파라미터로 전달 -->
+    <p th:text="#{customer.contact(${name}, ${phone})}">
+        고객님의 연락처는 010-1234-5678입니다
+    </p>
+</body>
+</html>
