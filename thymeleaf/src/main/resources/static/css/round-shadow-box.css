@@ -1,0 +1,10 @@
+/* round-shadow-box.css */
+.round-shadow-box {
+    display: inline-block;
+    padding: 12px 20px;
+    background-color: white;
+    color: #333;
+    font-weight: bold;
+    border: 2px solid #ccc;
+    border-radius: 40px;
+}
