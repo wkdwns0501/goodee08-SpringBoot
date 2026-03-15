@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>프래그먼트</title>
+  <link rel="stylesheet" th:href="@{/css/round-shadow-box.css}">
+</head>
+<body>
+  <header th:replace="~{fragment/common :: header('프로모션')}"></header>
+
+  <p>
+    <span class="round-shadow-box">구디아카데미에 오신 것을 환영합니다.</span>
+  </p>
+
+  <footer th:replace="~{fragment/common :: footer}"></footer>
+</body>
+</html>
