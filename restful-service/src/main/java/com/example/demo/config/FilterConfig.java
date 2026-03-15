@@ -30,5 +30,5 @@ public class FilterConfig {
 
         return bean;
     }
-
+2
 }
