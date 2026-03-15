@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>링크</title>
+</head>
+<body>
+    <!-- @{...} 자동으로 컨텍스트 경로를 추가 -->
+    <a href="member.html" th:href="@{/member}">회원 정보</a>
+    <!-- 쿼리 스트링 방식 -->
+    <a href="member.html" th:href="@{/member(id=${id})}">회원 정보</a>
+    <!-- 패스 파라미터(경로 변수) 방식 -->
+    <a href="member.html" th:href="@{/member/{id}(id=${id})}">회원 정보</a>
+</body>
+</html>
