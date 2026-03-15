@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>조건문</title>
+</head>
+<body>
+  <p th:if="${showWelcome}">
+    구디 아카데미에 오신 것을 환영합니다.
+  </p>
+  <p th:if="${showDescription}">
+    <b>베스트 직업훈련기관</b>은 시설도 베스트입니다!
+  </p>
+  <p th:if="${showWelcome} and !${showDescription}">
+    showWelcome이 true이고 showDescription은 false입니다.
+  </p>
+  <p th:if="${showExtra} == null">
+    showExtra 값이 null입니다.
+  </p>
+</body>
+</html>
