@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+  <meta charset="UTF-8">
+  <title>회원 목록</title>
+  <style>
+      .odd-row {
+        background-card
+      }
+  </style>
+</head>
+<body>
+  <p>회원 목록</p>
+  <table>
+    <tr th:each="member : ${members}">
+      <td th:text="${member.name}">회원 이름</td>
+      <td th:text="${member.email}">회원 이메일</td>
+      <td th:text="${member.age}">회원 나이</td>
+    </tr>
+  </table>
+
+  <br>
+
+  <table>
+<!--    <tr th:each="member, iter : ${members}" th:style="${iter.odd} ? 'background-color: lightgray;' : ''">-->
+    <tr th:each="member, iter : ${members}" th:style="${iter.odd} ? 'odd-row' : null">
+      <td th:text="${iter.count}">반복 카운트</td>
+      <td th:text="${member.name}">회원 이름</td>
+      <td th:text="${member.email}">회원 이메일</td>
+      <td th:text="${member.age}">회원 나이</td>
+    </tr>
+  </table>
+
+  <br>
+
+  <!-- p 태그를 반복 출력-->
+  <p th:each="member : ${members}">
+    <span th:text="${member.name}">회원 이름</span>
+    <span th:text="${member.email}">회원 이메일</span>
+    <span th:text="${member.age}">회원 나이</span>
+  </p>
+
+  <!-- 여러 태그를 묶어서 반복하기 위한 block 태그(HTML 결과에 포함되지 않음 -->
+  <th:block th:each="member : ${members}">
+    <h3 th:text="${member.name}">회원 이름</h3>
+    <p th:text="${member.email}">회원 이메일</p>
+    <span th:text="${member.age}">회원 나이</span>
+  </th:block>
+
+</body>
+</html>
