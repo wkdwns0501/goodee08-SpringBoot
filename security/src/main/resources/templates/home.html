@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <ul>
+        <li sec:authorize="isAnonymous()">
+            <a th:href="@{login}">로그인</a>
+        </li>
+        <li sec:authorize="isAuthenticated()">
+            <a th:href="@{logout}">로그아웃</a>
+        </li>
+        <li sec:authorize="isAuthenticated()">
+            <a th:href="@{home}" sec:authentication="principal.username">아이디</a>
+        </li>
+        <li sec:authorize="isAuthenticated()">
+            <a th:href="@{login}" sec:authentication="principal.displayName">홍길동</a>
+        </li>
+        <li sec:authorize="hasRole('ADMIN')">
+            <a th:href="@{/member/list}">회원 목록</a>
+        </li>
+    </ul>
+</body>
+</html>
