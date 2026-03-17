@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
+      th:replace="~{layout/base-layout::layout(~{::section})}">
+<!-- 현재 페이지의 section을 -> base-layout 템플릿의 layout fragment에 전달
+    즉 레이아웃 템플릿에 콘텐츠를 끼워 넣는 구조 -->
+<body>
+<section class="container">
+    <table class="table">
+        <thead>
+        <tr>
+            <td>#</td>
+            <td>제목</td>
+            <td style="width: 20%;">작성자</td>
+            <td style="width: 20%;">수정날짜</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="article : ${page.content}">
+            <td th:text="${article.id}">id</td>
+            <td>
+                <a th:text="${article.title}" th:href="@{/article/content(id=${article.id})}">title</a>
+            </td>
+            <td th:text="${article.name}">author</td>
+            <td th:text="${#temporals.format(article.updated, 'yyyy-MM-dd HH:mm:ss')}">2025-10-30 09:03:19</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <!-- 페이지네이션 추가 -->
+    <nav th:if="${!page.isEmpty()}"> <!-- page 객체가 비어있지 않을때만 페이징 UI 출력 -->
+        <!--
+            th:with (지역 변수 선언)
+            th:with="변수명=값"
+            예:
+            start = 현재 블록 시작 페이지
+            last = 현재 블록 마지막 페이지
+        -->
+        <!--
+            page.number: 현재 페이지 번호(0부터 시작)
+            1~5 페이지 -> start = 0
+            6~10 페이지 -> start = 5
+            11~15 페이지 -> start = 10
+        -->
+        <ul class="pagination" th:with="start=${T(java.lang.Math).floor(page.number / 5) * 5}, last=(${start + 4 < page.totalPages ? start + 4 : page.totalPages - 1})">
+            <li class="page-item" th:classappend="${page.first} ? 'disabled'">
+                <a class="page-link" th:href="@{/article/list(page=${page.number - 1})}">&laquo;</a>
+            </li>
+            <li th:each="pageNumber: ${#numbers.sequence(start, last)}" class="page-item" th:classappend="${pageNumber == page.number} ? 'active'">
+                <a class="page-link" th:text="${pageNumber + 1}" th:href="@{/article/list(page=${pageNumber})}">1</a>
+            </li>
+            <li class="page-item" th:classappend="${page.last} ? 'disabled'">
+                <a class="page-link" th:href="@{/article/list(page=${page.number + 1})}">&raquo;</a>
+            </li>
+        </ul>
+    </nav>
+
+    <a type="button" class="btn btn-primary" th:href="@{/article/add}" sec:authorize="isAuthenticated()">글쓰기</a>
+</section>
+</body>
+</html>
