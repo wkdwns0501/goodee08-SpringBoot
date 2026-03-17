@@ -35,6 +35,13 @@ public class ArticleService {
         // 페이지네이션을 구성하는 데 필요한 모든 정보가 들어 있음
     }
 
+    // 게시글 상세 보기
+    public ArticleDto findById(Long id) {
+        return articleRepository.findById(id)
+                .map(this::mapToArticleDto)
+                .orElseThrow();
+    }
+
     // 게시글 엔티티 객체를 DTO 객체로 변환하는 기능
     public ArticleDto mapToArticleDto(Article article) {
         return ArticleDto.builder()
