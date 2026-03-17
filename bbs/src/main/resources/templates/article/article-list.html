@@ -20,7 +20,7 @@
         <tr th:each="article : ${page.content}">
             <td th:text="${article.id}">id</td>
             <td>
-                <a th:text="${article.title}" th:href="@{/article/content(id=${article.id})}">title</a>
+                <a th:text="${article.title}" th:href="@{/article/content/{id}(id=${article.id})}">title</a>
             </td>
             <td th:text="${article.name}">author</td>
             <td th:text="${#temporals.format(article.updated, 'yyyy-MM-dd HH:mm:ss')}">2025-10-30 09:03:19</td>
@@ -43,19 +43,32 @@
             6~10 페이지 -> start = 5
             11~15 페이지 -> start = 10
         -->
+        <!-- T(java.lang.Math): 타임리프에서 java static 메소드 호출 -->
         <ul class="pagination" th:with="start=${T(java.lang.Math).floor(page.number / 5) * 5}, last=(${start + 4 < page.totalPages ? start + 4 : page.totalPages - 1})">
+            <!-- 현재 페이지가 첫 페이지면 버튼 비활성화-->
+            <!-- th:classappend : 클래스 추가-->
             <li class="page-item" th:classappend="${page.first} ? 'disabled'">
+                <!-- 이전 페이지 이동 -->
                 <a class="page-link" th:href="@{/article/list(page=${page.number - 1})}">&laquo;</a>
             </li>
-            <li th:each="pageNumber: ${#numbers.sequence(start, last)}" class="page-item" th:classappend="${pageNumber == page.number} ? 'active'">
+
+            <!-- start ~ last까지 반복-->
+            <!-- #numbers: 타임리프 내장 객체-->
+            <!-- sequence(start, last): start부터 last까지 컬랙션-->
+            <li th:each="pageNumber: ${#numbers.sequence(start, last)}"
+                class="page-item" th:classappend="${pageNumber == page.number} ? 'active'"> <!-- 현재 페이지면 active 클래스 적용-->
+                <!-- page.number는 0부터 시작, 사용자에게는 +1 해서 보여줌-->
                 <a class="page-link" th:text="${pageNumber + 1}" th:href="@{/article/list(page=${pageNumber})}">1</a>
             </li>
+            <!-- 현재 페이지가 마지막이면 버튼 비활성화 -->
             <li class="page-item" th:classappend="${page.last} ? 'disabled'">
+                <!-- 다음 페이지 이동 -->
                 <a class="page-link" th:href="@{/article/list(page=${page.number + 1})}">&raquo;</a>
             </li>
         </ul>
     </nav>
 
+    <!-- 로그인한 사용자만 글쓰기 가능 -->
     <a type="button" class="btn btn-primary" th:href="@{/article/add}" sec:authorize="isAuthenticated()">글쓰기</a>
 </section>
 </body>
