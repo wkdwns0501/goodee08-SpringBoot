@@ -1,10 +1,49 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
+      th:replace="~{layout/base-layout::layout(~{::section})}">
 <body>
-
+<section class="container">
+    <h1>게시판</h1>
+    <table class="table">
+        <tbody>
+        <tr>
+            <td style="width: 20%;">#</td>
+            <td th:text="${article.id}">100</td>
+        </tr>
+        <tr>
+            <td>제목</td>
+            <td th:text="${article.title}">게시글 제목</td>
+        </tr>
+        <tr>
+            <td>내용</td>
+            <td style="white-space: pre" th:text="${article.description}">게시글 내용</td>
+        </tr>
+        <tr>
+            <td>글쓴이</td>
+            <td th:text="${article.name}">윤서준</td>
+        </tr>
+        <tr>
+            <td>글쓴일</td>
+            <td th:text="${#temporals.format(article.created, 'yyyy-MM-dd HH:mm:ss')}">2025-10-30 09:03:18</td>
+        </tr>
+        <tr>
+            <td>수정일</td>
+            <td th:text="${#temporals.format(article.updated, 'yyyy-MM-dd HH:mm:ss')}">2025-10-30 10:10:25</td>
+        </tr>
+        </tbody>
+    </table>
+    <a type="button" class="btn btn-info btn-sm" th:href="@{/article/list}">목록</a>
+    <!-- 현재 사용자가 로그인한 사용자 확인
+        로그인한 사용자라면 #authentication.principal로 참조 가능
+    -->
+    <!-- 게시글을 작성한 회원의 아이디와 로그인한 회원의 아이디가 같다면 수정, 삭제 버튼을 보여줌 -->
+<!--    <th:block sec:authorize="isAuthenticated()" th:if="${userDetails.memberId == article.memberId}">--> <!-- 방법 2 -->
+    <th:block sec:authorize="isAuthenticated()" th:if="${#authentication.principal.memberId == article.memberId}"> <!-- 방법 1-->
+        <a type="button" class="btn btn-warning btn-sm" th:href="@{/article/edit/{id}(id=${article.id})}">수정</a>
+        <a type="button" class="btn btn-danger btn-sm" th:href="@{/article/delete/{id}(id=${article.id})}">삭제</a>
+    </th:block>
+</section>
 </body>
 </html>
