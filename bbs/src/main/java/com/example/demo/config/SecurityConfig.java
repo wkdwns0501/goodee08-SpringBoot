@@ -17,8 +17,9 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(withDefaults())
                 .authorizeHttpRequests(authorize -> authorize
+                        .requestMatchers("/error/**").permitAll()
                         .requestMatchers("/css/**", "/js/**", "/image/**").permitAll()
-                        .requestMatchers("/", "/article/list", "/article/content").permitAll()
+                        .requestMatchers("/", "/article/list", "/article/content/**").permitAll()
                         .requestMatchers("/signup").permitAll()
                         .requestMatchers("/member/**").hasAuthority("ROLE_ADMIN")
                         .anyRequest().authenticated()
