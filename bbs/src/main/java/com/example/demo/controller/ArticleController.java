@@ -11,6 +11,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Slf4j
@@ -37,6 +38,17 @@ public class ArticleController {
         model.addAttribute("page", articlesByPage);
 
         return "/article/article-list";
+    }
+
+    // 게시글 상세 보기
+    @GetMapping("/content/{id}")
+    public String getArticle(@PathVariable("id") Long id, Model model
+//                            ,@AuthenticationPrincipal MemberUserDetails userDetails
+    ) {                         // 없는게 방법 1,
+        ArticleDto article = articleService.findById(id);
+        model.addAttribute("article", article);
+//        model.addAttribute("userDetails", userDetails); // 있는게 방법 2
+        return "/article/article-content";
     }
 
 }
