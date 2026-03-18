@@ -19,7 +19,7 @@ public class MemberForm {
     @NotBlank(message = "이메일을 입력하세요")
     @Email(message = "이메일 형식이 잘못 되었습니다") // 간단한 이메일 형식검사
     private String email;
-    @NotBlank(message = "패스워드를 입력하세요")
+//    @NotBlank(message = "패스워드를 입력하세요")
     @Size(min = 8, message = "패스워드를 8글자 이상 입력하세요")
     private String password;
     private String passwordConfirm;
