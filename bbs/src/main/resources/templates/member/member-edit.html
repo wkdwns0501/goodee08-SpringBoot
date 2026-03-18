@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout/base-layout::layout(~{::section})}">
+<body>
+<section class="container">
+    <h1>사용자 수정</h1>
+
+    <form th:object="${member}" th:action="@{/member/edit}" method="post">
+        <input type="hidden" name="id" th:value="*{id}">
+
+        <div class="mb-3">
+            <label class="form-label">이름</label>
+            <input type="text" class="form-control" th:field="*{name}">
+            <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="text-danger">
+                Name Error
+            </p>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">이메일</label>
+            <input type="text" class="form-control-plaintext" th:field="*{email}" readonly> <!-- 이메일은 수정 불가 -->
+            <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="text-danger">
+                Email Error
+            </p>
+        </div>
+
+        <button type="submit" class="btn btn-primary">저장</button>
+    </form>
+</section>
+</body>
+</html>
