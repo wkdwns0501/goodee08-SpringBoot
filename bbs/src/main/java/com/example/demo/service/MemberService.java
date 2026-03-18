@@ -6,6 +6,8 @@ import com.example.demo.entity.Member;
 import com.example.demo.repository.ArticleRepository;
 import com.example.demo.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -60,6 +62,33 @@ public class MemberService {
         Member member = memberRepository.findById(id).orElseThrow();
         member.setPassword(passwordEncoder.encode(password));
         memberRepository.save(member); // 트랜젝션이 있으면 안적어도 변경 사항 감지해서 save
+    }
+
+    // 회원 목록 기능(+페이징 처리)
+    public Page<MemberDto> findAll(Pageable pageable) {
+        return memberRepository.findAll(pageable)
+                .map(this::mapToMemberDto);
+    }
+
+    // 회원 정보 수정 기능
+    public MemberDto patch(MemberForm memberForm) {
+        Member member = memberRepository.findById(memberForm.getId()).orElseThrow();
+
+        if (memberForm.getName() != null) member.setName(memberForm.getName());
+        if (memberForm.getEmail() != null) member.setEmail(memberForm.getEmail());
+        memberRepository.save(member);
+
+        return mapToMemberDto(member);
+    }
+
+    // 회원 삭제 기능
+    public void deleteById(Long id) {
+        Member member = memberRepository.findById(id).orElseThrow();
+
+        // 회원을 삭제하기에 앞서, 해당 회원이 작성한 게시글을 먼저 삭제해야 함
+        // cascade 옵션 보다 권장하는 방식
+        articleRepository.deleteAllByMember(member);
+        memberRepository.delete(member);
     }
 
     // 회원 엔티티 객체를 DTO 객체로 변환하는 기능
